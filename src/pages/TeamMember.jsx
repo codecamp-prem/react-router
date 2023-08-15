@@ -1,13 +1,15 @@
-import { useParams } from "react-router-dom"
-import teamMembers from "../team-member.json"
+import { useLoaderData } from "react-router-dom"
+//import teamMembers from "../team-member.json"
 
-export function TeamMember({name}){
+export function TeamMember(){
     // called as same params what you have called in router.jsx params
     // path: ":teamMemberId" so teamMemberId
     // if it path: ":teamMemberId/someOtherParam/:someId"
     // then const { teamMemberId, someId } = useParams()
-    const { teamMemberId } = useParams()  
-    const member = teamMembers.find(m => m.id === teamMemberId)
+
+    // const { teamMemberId } = useParams()  
+    // const member = teamMembers.find(m => m.id === teamMemberId) //while using local json file
+    const member = useLoaderData() 
     
     return (
         <>
