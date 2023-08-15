@@ -1,4 +1,4 @@
-import { Outlet, createBrowserRouter } from "react-router-dom";
+import { Navigate, Outlet, createBrowserRouter } from "react-router-dom";
 import { NavBar } from "./NavBar";
 import { Home } from "./pages/Home";
 import { Store } from "./pages/Store";
@@ -6,12 +6,14 @@ import { About } from "./pages/About";
 import { Team } from "./pages/Team";
 import { TeamMember } from "./pages/TeamMember";
 import { TeamNav } from "./TeamNav";
+import { NewTeamMember } from "./pages/NewTeamMember";
 
 export const router = createBrowserRouter([
     {
         element: <NavLayout />, 
         errorElement: <h1>Error: This Custom error will show to Every Children</h1>,
         children: [
+            {path: "*", element: <Navigate to="/" />}, // if 404, navigate to home page
             {path: "/", element: <Home />},
             {path: "/store", element: <Store />},
             {
@@ -24,8 +26,8 @@ export const router = createBrowserRouter([
                 element: <TeamNavLayout />,
                 children:[
                     {index: true, element: <Team />},
-                    {path: "john", element: <TeamMember name="John Doe" />},
-                    {path: "jane", element: <TeamMember name="Jane Doe" />}
+                    {path: ":teamMemberId", element: <TeamMember />},
+                    {path: "new-team-member", element: <NewTeamMember />}
                 ]
             }
         ]
